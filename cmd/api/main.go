@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/felixge/httpsnoop"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
@@ -21,15 +20,6 @@ var (
 	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
 )
 
-func withLogger(handler http.Handler) http.Handler {
-	// the create a handler
-	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		// pass the handler to httpsnoop to get http status and latency
-		m := httpsnoop.CaptureMetrics(handler, writer, request)
-		// printing exracted data
-		log.Printf("http[%d]-- %s -- %s\n", m.Code, m.Duration, request.URL.Path)
-	})
-}
 func run() error {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
