@@ -4,26 +4,22 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"
-	"net"
-
 	pb "github.com/Vingurzhou/zwz-proxy/proto"
 	"google.golang.org/grpc"
+	"log"
+	"net"
 )
 
 var (
 	port = flag.Int("port", 9090, "The server port")
 )
 
-// server is used to implement helloworld.GreeterServer.
 type server struct {
 	pb.UnimplementedHelloWorldServer
 }
 
-// SayHello implements helloworld.GreeterServer
 func (s *server) Echo(ctx context.Context, in *pb.StringMessage) (*pb.StringMessage, error) {
-	log.Printf("Received: %v", in.Value)
-	return &pb.StringMessage{Value: "Hello " + in.Value}, nil
+	return &pb.StringMessage{Value: in.Value}, nil
 }
 
 func main() {

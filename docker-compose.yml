@@ -1,0 +1,12 @@
+version: '3'
+services:
+  rpc:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    # 配置 service1 的其他设置
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    # 配置 service2 的其他设置
