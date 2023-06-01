@@ -27,9 +27,7 @@ go run cmd/rpc/main.go & go run cmd/api/main.go
 
 ##  部署
 ```shell
-export GOOS=linux
-export GOARCH=amd64
-go build -o build/zpr cmd/rpc/main.go
-go build -o build/zpa cmd/api/main.go
+env GOOS=linux GOARCH=amd64 go build -o build/zpr cmd/rpc/main.go
+env GOOS=linux GOARCH=amd64 go build -o build/zpa cmd/api/main.go
 scp -r /Users/zhouwenzhe/src/zwz-proxy/build root@108.160.138.133:/root/zwz
 ```
